@@ -13,6 +13,9 @@ class ProductsController < ApplicationController
   end
 
   def create
+    if current_user.nil?
+      redirect_to new_user_session_path, alert: "You must be logged in to create a product."
+    else
     @product = Product.new(product_params)
 
     if @product.save
