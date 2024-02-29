@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_183716) do
     t.bigint "product_id", null: false
     t.bigint "rentee_id", null: false
     t.date "start_date"
-    t.date "end_data"
+    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_rentals_on_product_id"
