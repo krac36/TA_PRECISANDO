@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.user = current_user
 
     if @product.save
       redirect_to products_path, notice: "Product was successfully created."
@@ -28,7 +29,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: "Product was successfully updated."
+      redirect_to products_path, notice: "Product was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
