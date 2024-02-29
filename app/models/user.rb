@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one_attached :photo
   # has_many :products
   validates :cpf, uniqueness: true
   validates :address, uniqueness: true
