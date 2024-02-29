@@ -8,6 +8,7 @@
         <div class="card-body">
           <h5 class="card-title"><%= product.name %></h5>
           <p class="card-text"><%= product.description %></p>
+          <p class="card-text">Rented by:<%= product.user.username %></p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
               <%= link_to 'Show', product, class: 'btn btn-sm btn-outline-secondary' %>
