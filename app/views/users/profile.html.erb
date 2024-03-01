@@ -10,7 +10,11 @@
     <% current_user.products.each do |product| %>
       <div class="col-md-2">
         <div class="card mb-4 shadow-sm">
-          <%= cl_image_tag product.photos.first.key, class: "card-img-top", alt: product.name %>
+         <% if current_user.photo.attached?  %>
+            <%= cl_image_tag product.photos.first.key, class: "card-img-top", alt: product.name %>
+          <% else %>
+            <%= image_tag "https://cdn.pixabay.com/photo/2023/09/22/12/18/profile-8268938_640.png", alt: "default image", width: 35 %>
+          <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= product.name %></h5>
             <p class="card-text"><%= product.description %></p>
