@@ -11,12 +11,14 @@
   </head>
 
   <body>
-    <div class="d-flex flex-column justify-content-between ">
+    <div class="page-container">
     <%= render "shared/navbar" %>
-    <div class="vh-100"><%= yield %></div>
+    <main id="main-content">
+      <%= yield %>
+    </main>
     <%= render "pages/footer" %>
     </div>
-    <%= render "shared/flashes" %>
+      <%= render "shared/flashes" %>
 
-  </body>
-</html>
+    </body>
+  </html>
