@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :rentals, only: %i[create]
   end
 
+  get "/profile", to: "users#profile", as: :profile
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
