@@ -6,4 +6,5 @@ class Product < ApplicationRecord
 
   validates :description, :price, :name, :category, presence: true
   validates :category, inclusion: { in: CATEGORIES }
+  validates :photos, presence: true
 end
