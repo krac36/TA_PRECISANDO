@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :products
-  has_many :rentals
+  has_many :rentals, foreign_key: "rentee_id"
   has_one_attached :photo
 
   validates :cpf, uniqueness: true
