@@ -30,3 +30,13 @@
   }
 
 }
+
+.card_link {
+  text-decoration: none;
+
+  &:hover{
+    display: block;
+    background: rgba(0, 0, 0, .100);
+  }
+
+}
