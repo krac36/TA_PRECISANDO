@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :user
+  has_many_attached :photos
 
   CATEGORIES = ['cars', 'clothes', 'furniture', 'art', 'tools', 'others']
 

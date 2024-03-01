@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :products
   has_many :rentals
+  has_one_attached :photo
 
   validates :cpf, uniqueness: true
   validates :address, uniqueness: true

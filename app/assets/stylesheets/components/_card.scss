@@ -1,0 +1,32 @@
+.card.mb-3.shadow-sm.p-3{
+
+  min-height: 170px;
+  background-color: $background-gray;
+
+  h5 {
+    color: $logo-black;
+  }
+
+  p {
+    color:$logo-black;
+  }
+}
+
+.card{
+  background-color: $background-gray;
+
+  .card-body{
+    min-width: 100px;
+  }
+
+
+  h4{
+    color: $logo-black;
+  }
+
+  p {
+    color: $logo-black;
+    min-height: 65px;
+  }
+
+}
