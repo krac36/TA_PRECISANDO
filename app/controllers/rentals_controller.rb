@@ -6,7 +6,7 @@ class RentalsController < ApplicationController
     @rental.product = @product
     @rental.rentee = current_user
     if @rental.save
-      redirect_to products_path, notice: "Product was successfully rented."
+      redirect_to profile_path, notice: "Rental request sent to #{@product.name}'s renter."
     else
       render "products/show", status: :unprocessable_entity
     end
