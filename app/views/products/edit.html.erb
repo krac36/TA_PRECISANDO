@@ -1,6 +1,36 @@
 <h1>Edit <%= @product.name %> </h1>
 
-<%= render 'form', product: @product %>
+<%= simple_form_for(@product) do |f| %>
+
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <%= f.input :category, collection: Product::CATEGORIES %>
+  <% @product.photos.each do |photo| %>
+    <%= f.hidden_field :photos, multiple: true, value: photo.signed_id %>
+  <% end %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true }  %>
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <%= link_to 'Show', @product %> |
 <%= link_to 'Back', products_path %>
