@@ -1,16 +1,30 @@
 class RentalsController < ApplicationController
-  before_action :set_product
+  before_action :set_product, only: :create
 
   def create
     @rental = Rental.new(rental_params)
     @rental.product = @product
     @rental.rentee = current_user
+    @rental.confirmed = false
     if @rental.save
-      redirect_to products_path, notice: "Product was successfully rented."
+      redirect_to profile_path, notice: "Rental request sent to #{@product.name}'s renter."
     else
       render "products/show", status: :unprocessable_entity
     end
   end
+
+  def update
+    @rental = Rental.find(params[:id])
+    @rental.update(confirmed: true)
+    redirect_to profile_path(current_user), notice: "Rental request has been confirmed."
+  end
+
+  def destroy
+    @rental = Rental.find(params[:id])
+    @rental.destroy
+    redirect_to profile_path(current_user), notice: "Rental request has been rejected."
+  end
+
 
   private
 

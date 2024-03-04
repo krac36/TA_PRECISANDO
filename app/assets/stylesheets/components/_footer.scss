@@ -1,5 +1,37 @@
 body{
   position: relative;
+
+  h3{
+    color: $brown;
+  }
+
+  h4{
+    color: $brown;
+  }
+
+  .list-icon{
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    color: $brown;
+
+    li{
+      width: 30px;
+    }
+  }
+
+
+  .list{
+    color: $brown;
+  }
+
+  p{
+    color: $brown;
+  }
+
+  a{
+    color: $brown;
+  }
 }
 main{
   margin-bottom: 220px;
@@ -11,4 +43,3 @@ main{
   bottom: 40px;
   left: 0;
 }
-
