@@ -7,7 +7,7 @@ class RentalsController < ApplicationController
     @rental.rentee = current_user
     @rental.confirmed = false
     if @rental.save
-      redirect_to products_path, notice: "Product was successfully rented."
+      redirect_to products_path, notice: "Rental Request successfuly sent, please await owner approval."
     else
       render "products/show", status: :unprocessable_entity
     end
