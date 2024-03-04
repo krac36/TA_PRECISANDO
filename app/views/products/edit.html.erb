@@ -1,6 +1,15 @@
-<h1>Edit <%= @product.name %> </h1>
+<h1 class="text-capitalize text-center">Edit: <%= @product.name %> </h1>
 
-<%= render 'form', product: @product %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<div class="container ">
+  <div class="row mt-4 justify-content-center">
+    <div class="col-6 col-lg-6 p-4 mb-2 bg-light text-dark">
+
+      <%= render 'form', product: @product %>
+      <%= link_to 'Show', @product %> |
+      <%= link_to 'Back', products_path %>
+
+
+    </div>
+  </div>
+</div>
