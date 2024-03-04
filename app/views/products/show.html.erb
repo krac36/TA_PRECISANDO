@@ -29,7 +29,9 @@
         <strong>Renter:</strong>
         <%= @product.user.username %>
       </p>
+      <% if current_user == @product.user  %>
       <%= link_to 'Edit', edit_product_path(@product) %> |
+      <% end %>
       <%= link_to 'Back', products_path %>
     </div>
     <% unless current_user == @product.user %>
