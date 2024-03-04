@@ -27,7 +27,7 @@
       </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row my-4">
     <div class="col-5">
       <h4 class="mb-4">Information</h3>
       <p>
@@ -52,11 +52,19 @@
       <%= link_to 'Back', products_path %>
     </div>
     <% unless current_user == @product.user %>
-      <div class="col-7">
-        <h4 class="mb-4">Rent this <%= @product.category %></h4>
+      <div data-controller="rentals-calendar" class="col-7">
+        <h4 class="mb-4">Rent this product</h4>
         <%= simple_form_for [@product, @rental] do |f| %>
-          <%= f.input :start_date %>
-          <%= f.input :end_date %>
+          <%= f.input :start_date, as: :string, input_html:
+            {
+              "data-rentals-calendar-target" => "startDate"
+            }
+          %>
+          <%= f.input :end_date, as: :string, input_html:
+            {
+              "data-rentals-calendar-target" => "endDate"
+            }
+          %>
           <%= f.button :submit, "Rent this item", class: "btn btn-default btn-primary text-white" %>
         <% end %>
       </div>

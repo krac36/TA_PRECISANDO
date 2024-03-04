@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :products do
+    member do
+      get :blocked_dates
+    end
     resources :rentals, only: %i[create]
   end
 
