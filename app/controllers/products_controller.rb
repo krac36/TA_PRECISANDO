@@ -42,7 +42,6 @@ class ProductsController < ApplicationController
   end
 
   def blocked_dates
-    # render json: @product.rentals.select(:start_date, :end_date)
     custom_response = @product.rentals.map do |rental|
       {
         start_date: rental.start_date,
