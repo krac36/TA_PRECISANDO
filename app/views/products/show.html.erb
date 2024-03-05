@@ -1,9 +1,7 @@
-
-
-<div class="container ">
+<div class="container">
   <h2 class="text-center text-capitalize mt-4"><%= @product.name %></h2>
   <div class="row justify-content-center">
-    <div class="col-6 col-lg-4">
+    <div class="col-12 col-lg-8">
       <div class="product-details-card pt-4">
 
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -30,15 +28,15 @@
             </button>
           </div>
           <div class="row">
-            <div class="col-5 text-capitalize">
-              <h4 class="mb-4 text-center">Information</h3>
+            <div class="col-lg-7 col-md-12 col-sm-12 text-capitalize">
+              <h4 class="my-4">Information</h3>
               <p>
                 <strong>Description:</strong>
                 <%= @product.description %>
               </p>
               <p>
                 <strong>Price:</strong>
-                R$<%= @product.price %>
+                R$ <%= "#{@product.price.to_s.split('.')[0]},#{@product.price.to_s.split('.')[1] == "0" ? "00" : @product.price.to_s.split('.')[1]}" %>
               </p>
               <p>
                 <strong>Category:</strong>
@@ -48,18 +46,30 @@
                 <strong>Renter:</strong>
                 <%= @product.user.username %>
               </p>
-              <% if current_user == @product.user  %>
-                <%= link_to 'Edit', edit_product_path(@product) %> |
+              <%= link_to products_path do %>
+                <i class="fa-solid fa-arrow-rotate-left"></i>
               <% end %>
-              <%= link_to 'Back', products_path %>
+              <% if current_user == @product.user  %>
+                <%= link_to edit_product_path(@product) do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+              <% end %>
               </div>
               <% unless current_user == @product.user %>
-                <div class="col-7">
-                  <h4 class="mb-4">Rent this <%= @product.category %></h4>
+                <div data-controller="rentals-calendar" class="col-lg-5 col-md-12 col-sm-12">
+                  <h4 class="my-4">Rent this product</h4>
                   <%= simple_form_for [@product, @rental] do |f| %>
-                    <%= f.input :start_date %>
-                    <%= f.input :end_date %>
-                    <%= f.button :submit, "Rent this item", class: "btn btn-default btn-primary text-white" %>
+                    <%= f.input :start_date, as: :string, input_html:
+                      {
+                        "data-rentals-calendar-target" => "startDate"
+                      }
+                    %>
+                    <%= f.input :end_date, as: :string, input_html:
+                      {
+                        "data-rentals-calendar-target" => "endDate"
+                      }
+                    %>
+                    <%= f.button :submit, "Ask for rent", class: "btn btn-default btn-primary text-white" %>
                   <% end %>
                 </div>
               <% end %>
@@ -67,47 +77,3 @@
       </div>
     </div>
   </div>
-
-  <div class="row my-4">
-    <div class="col-5">
-      <h4 class="mb-4">Information</h3>
-      <p>
-        <strong>Description:</strong>
-        <%= @product.description %>
-      </p>
-      <p>
-        <strong>Price:</strong>
-        R$<%= @product.price %>
-      </p>
-      <p>
-        <strong>Category:</strong>
-        <%= @product.category %>
-      </p>
-      <p>
-        <strong>Renter:</strong>
-        <%= @product.user.username %>
-      </p>
-      <% if current_user == @product.user  %>
-      <%= link_to 'Edit', edit_product_path(@product) %> |
-      <% end %>
-      <%= link_to 'Back', products_path %>
-    </div>
-    <% unless current_user == @product.user %>
-      <div data-controller="rentals-calendar" class="col-7">
-        <h4 class="mb-4">Rent this product</h4>
-        <%= simple_form_for [@product, @rental] do |f| %>
-          <%= f.input :start_date, as: :string, input_html:
-            {
-              "data-rentals-calendar-target" => "startDate"
-            }
-          %>
-          <%= f.input :end_date, as: :string, input_html:
-            {
-              "data-rentals-calendar-target" => "endDate"
-            }
-          %>
-          <%= f.button :submit, "Rent this item", class: "btn btn-default btn-primary text-white" %>
-        <% end %>
-      </div>
-    <% end %>
-</div>
