@@ -1,13 +1,13 @@
 
-<h1 class="text-capitalize text-center">New Product</h1>
+<h1 class="text-capitalize text-center mt-4">New Product</h1>
 
 
 <div class="container ">
   <div class="row mt-4 justify-content-center">
-    <div class="col-6 col-lg-4">
+    <div class="col-6 col-lg-6 p-4 mb-2 bg-light text-dark">
       <%= render 'form', product: @product %>
       <%= link_to products_path do %>
-        <i class="fa-solid fa-circle-arrow-left fa-2x mt-5"></i>
+        <i class="fa-solid fa-arrow-rotate-left" style="font-size:20px;"></i>
       <% end %>
     </div>
   </div>
