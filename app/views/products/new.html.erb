@@ -6,7 +6,9 @@
   <div class="row mt-4 justify-content-center">
     <div class="col-6 col-lg-4">
       <%= render 'form', product: @product %>
-      <%= link_to 'Back', products_path %>
+      <%= link_to products_path do %>
+        <i class="fa-solid fa-circle-arrow-left fa-2x mt-5"></i>
+      <% end %>
     </div>
   </div>
 </div>

@@ -12,7 +12,14 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "All Products", "/products", class: "nav-link" %>
+            <button class="btn btn-outline-danger btn-sm">
+              <%= link_to "All Products", "/products", class: "nav-link" %>
+            </button>
+          </li>
+          <li>
+            <button class="btn btn-outline-primary btn-sm">
+              <%= link_to "New Product", new_product_path, class: "nav-link" %>
+            </button>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

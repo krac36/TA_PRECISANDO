@@ -49,9 +49,13 @@
                 <%= @product.user.username %>
               </p>
               <% if current_user == @product.user  %>
-                <%= link_to 'Edit', edit_product_path(@product) %> |
+                <%= link_to edit_product_path(@product) do %>
+                  <i class="fa-regular fa-pen-to-square me-2"></i>
+                <% end %>
               <% end %>
-              <%= link_to 'Back', products_path %>
+              <%= link_to products_path do %>
+                <i class="fa-solid fa-circle-arrow-left"></i>
+              <% end %>
               </div>
               <% unless current_user == @product.user %>
                 <div class="col-7">
@@ -68,30 +72,6 @@
     </div>
   </div>
 
-  <div class="row my-4 text-capitalize">
-    <div class="col-5">
-      <h4 class="mb-4">Information</h3>
-      <p>
-        <strong>Description:</strong>
-        <%= @product.description %>
-      </p>
-      <p>
-        <strong>Price:</strong>
-        R$<%= @product.price %>
-      </p>
-      <p>
-        <strong>Category:</strong>
-        <%= @product.category %>
-      </p>
-      <p>
-        <strong>Renter:</strong>
-        <%= @product.user.username %>
-      </p>
-      <% if current_user == @product.user  %>
-      <%= link_to 'Edit', edit_product_path(@product) %> |
-      <% end %>
-      <%= link_to 'Back', products_path %>
-    </div>
     <% unless current_user == @product.user %>
       <div data-controller="rentals-calendar" class="col-7">
         <h4 class="mb-4">Rent this product</h4>
