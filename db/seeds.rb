@@ -106,15 +106,15 @@ product.photos.attach(io: file, filename: "sofa.png", content_type: "image/png")
 product.save
 
 file = URI.open("https://ae01.alicdn.com/kf/Sa7d11807908d46c895d280f655d02fbdR/TANZU-21V-Brushless-Chain-Saw-12-Inch-Electric-ChainSaw-Pruning-Wood-Power-Tool-Garden-Branch-Cutting.jpg")
-product = Product.new(
+chainsaw = Product.new(
   description: 'TANZU 21V Brushless Chain Saw 12 Inch Electric ChainSaw Pruning Wood Power Tool Garden Branch Cutting Machine Lithium Battery',
   price: 50.99,
   name: 'Chainsaw',
   category: 'tools',
   user_id: User.last.id
 )
-product.photos.attach(io: file, filename: "chainsaw.png", content_type: "image/png")
-product.save
+chainsaw.photos.attach(io: file, filename: "chainsaw.png", content_type: "image/png")
+chainsaw.save
 
 file = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/640px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg")
 file2 = URI.open("https://s.rfi.fr/media/display/020d38cc-10b8-11ea-99ec-005056bf7c53/w:1280/p:1x1/000_Par2712571_0.jpg")
@@ -128,6 +128,15 @@ product = Product.new(
 product.photos.attach(io: file, filename: "painting.png", content_type: "image/png")
 product.photos.attach(io: file2, filename: "frame.png", content_type: "image/png")
 product.save
+
+rental = Rental.new(
+    product_id: chainsaw.id,
+    rentee_id: jane.id,
+    start_date: Date.today,
+    end_date: Date.today + 5,
+    confirmed: true
+)
+rental.save
 
 
 puts 'done!'
