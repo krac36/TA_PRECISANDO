@@ -1,9 +1,13 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: %i[show edit update destroy blocked_dates]
   skip_before_action :authenticate_user!, only: :index
 
   def index
     @products = Product.all
+
+    if params[:query].present?
+      @products = @products.global_search(params[:query])
+    end
   end
 
   def show
@@ -25,7 +29,6 @@ class ProductsController < ApplicationController
     end
   end
 
-
   def edit
   end
 
@@ -40,6 +43,16 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     redirect_to products_url, notice: "Product was successfully destroyed."
+  end
+
+  def blocked_dates
+    custom_response = @product.rentals.map do |rental|
+      {
+        start_date: rental.start_date,
+        end_date: rental.end_date
+      }
+    end
+    render json: custom_response
   end
 
   private
