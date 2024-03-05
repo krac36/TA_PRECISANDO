@@ -5,11 +5,24 @@
   <div class="row mt-4 justify-content-center">
     <div class="col-6 col-lg-6 p-4 mb-2 bg-light text-dark">
 
-      <%= render 'form', product: @product %>
+      <%= simple_form_for(@product) do |f| %>
+
+        <%= f.input :name %>
+        <%= f.input :description %>
+        <%= f.input :price %>
+        <%= f.input :category, collection: Product::CATEGORIES %>
+        <% @product.photos.each do |photo| %>
+          <%= f.hidden_field :photos, multiple: true, value: photo.signed_id %>
+        <% end %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true }  %>
+        <div class="actions">
+          <%= f.button :submit %>
+        </div>
+
+      <% end %>
+
       <%= link_to 'Show', @product %> |
       <%= link_to 'Back', products_path %>
-
-
     </div>
   </div>
 </div>
