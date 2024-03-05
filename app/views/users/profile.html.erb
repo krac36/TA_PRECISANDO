@@ -1,71 +1,67 @@
-<div class="container">
-  <h1><%= current_user.username %>'s Profile
+<div class="container ">
+  <h1 class="text-left text-capitalize p-3"><%= current_user.username %>'s Profile
     <% if current_user.photo.attached?  %>
       <%= cl_image_tag current_user.photo.key, height: 70, width: 70, crop: :fill, class: "rounded-circle", alt: "picture" %>
     <% else %>
       <%= image_tag "https://cdn.pixabay.com/photo/2023/09/22/12/18/profile-8268938_640.png", alt: "default image", class: "rounded-circle", width: 70 %>
     <% end %>
   </h1>
-  <p><strong>Full Name:</strong> <%= current_user.fullname %>     </p>
-  <p><strong>Address:</strong> <%= current_user.address %></p>
-  <p><strong>Email:</strong> <%= current_user.email %></p>
+  <div class="text-capitalize text-left p-3">
+    <p><strong>Full Name:</strong> <%= current_user.fullname %>     </p>
+    <p><strong>Address:</strong> <%= current_user.address %></p>
+    <p><strong>Email:</strong> <%= current_user.email %></p>
+  </div>
   <!-- Add more profile attributes as needed -->
-
-  <h2>My products:</h2>
-  <div class="row ms-3">
+  <h2 class="text-center text-capitalize p-3">My products:</h2>
+  <div class="row ms-4 justify-content-center">
     <% current_user.products.each do |product| %>
-      <div class="col-md-2">
-        <div class="card mb-4 shadow-sm">
-         <% if current_user.photo.attached?  %>
-            <%= cl_image_tag product.photos.first.key, class: "card-img-top", alt: product.name %>
-          <% else %>
-            <%= image_tag "https://cdn.pixabay.com/photo/2023/09/22/12/18/profile-8268938_640.png", alt: "default image", width: 35 %>
-          <% end %>
+      <div class="col-md-3 w-30 p-3">
+        <div class="card mb-4 shadow-sm h-100">
+          <%= cl_image_tag product.photos.first.key, alt: product.name %>
           <div class="card-body">
-            <h5 class="card-title"><%= product.name %></h5>
+            <h5 class="card-title"><%= link_to product.name, product, class: "text-decoration-none" %></h5>
             <p class="card-text"><%= product.description %></p>
-            <small class="text-muted"><%= number_to_currency(product.price) %></small>
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex flex-wrap justify-content-between align-items-center text-end">
               <div class="btn-group">
-                <%= link_to 'Show', product, class: 'btn btn-sm btn-outline-secondary' %>
                 <% if current_user == product.user %>
                   <%= link_to 'Edit', edit_product_path(product), class: 'btn btn-sm btn-outline-secondary' %>
                   <%= link_to 'Delete', product_path(product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this product?'}, class: 'btn btn-sm btn-outline-secondary' %>
                 <% end %>
               </div>
+              <small class=".text-body-secondary"><%= number_to_currency(product.price) %></small>
             </div>
           </div>
         </div>
       </div>
     <% end %>
   </div>
-
   <br>
-
-  <%= link_to 'New Product', new_product_path, class: 'btn btn-primary mb-3' %>
-
-<% if current_user.products.present? %>
-  <h2>Pending Rentals:</h2>
-  <% pending_rentals = current_user.products.map(&:rentals).flatten.select { |rental| !rental.confirmed } %>
-  <% if pending_rentals.present? %>
-    <ul>
-      <% pending_rentals.each do |rental| %>
-        <li>
-          <%= rental.product.name %> - <%= rental.start_date %> to <%= rental.end_date %>
-          <%= button_to "Confirm", rental_path(rental), method: :patch, data: { confirm: "Are you sure you want to confirm this rental request?" } %>
-          <%= link_to "Reject", rental_path(rental), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to reject this rental request?'} %>
-        </li>
+  <div class= 'row justify-content-center'>
+    <%= link_to 'New Product', new_product_path, class: 'btn btn-primary btn-lg w-25 ' %>
+  </div>
+  <div class="pt-5">
+    <% if current_user.products.present? %>
+      <h2>Pending Rentals:</h2>
+      <% pending_rentals = current_user.products.map(&:rentals).flatten.select { |rental| !rental.confirmed } %>
+      <% if pending_rentals.present? %>
+        <ul>
+          <% pending_rentals.each do |rental| %>
+            <li>
+              <%= rental.product.name %> - <%= rental.start_date %> to <%= rental.end_date %>
+              <%= button_to "Confirm", rental_path(rental), method: :patch, data: { confirm: "Are you sure you want to confirm this rental request?" } %>
+              <%= link_to "Reject", rental_path(rental), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to reject this rental request?'} %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No pending rentals.</p>
       <% end %>
-    </ul>
-  <% else %>
-    <p>No pending rentals.</p>
-  <% end %>
-<% end %>
-
-  <h2>Rentals:</h2>
-  <ul>
-    <% current_user.rentals.each do |rental| %>
-      <li><%= rental.product.name %> - <%= rental.start_date %> to <%= rental.end_date %> - <%= rental.confirmed ? 'Accepted' : 'Pending' %></li>
     <% end %>
-  </ul>
-</div>
+      <h2>Rentals:</h2>
+      <ul>
+        <% current_user.rentals.each do |rental| %>
+          <li><%= rental.product.name %> - <%= rental.start_date %> to <%= rental.end_date %> - <%= rental.confirmed ? 'Accepted' : 'Pending' %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
