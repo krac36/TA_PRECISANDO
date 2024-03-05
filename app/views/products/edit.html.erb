@@ -1,4 +1,4 @@
-<h1 class="text-capitalize text-center">Edit: <%= @product.name %> </h1>
+<h1 class="text-capitalize text-center mt-4">Edit: <%= @product.name %> </h1>
 
 
 <div class="container ">
@@ -15,14 +15,15 @@
           <%= f.hidden_field :photos, multiple: true, value: photo.signed_id %>
         <% end %>
         <%= f.input :photos, as: :file, input_html: { multiple: true }  %>
-        <div class="actions">
-          <%= f.button :submit %>
+        <div class="actions d-flex justify-content-center">
+          <%= f.button :submit, class: "btn btn-default btn-primary text-white my-2" %>
         </div>
 
       <% end %>
 
-      <%= link_to 'Show', @product %> |
-      <%= link_to 'Back', products_path %>
+      <%= link_to @product do%>
+        <i class="fa-solid fa-arrow-rotate-left" style="font-size:20px;"></i>
+      <% end %>
     </div>
   </div>
 </div>
