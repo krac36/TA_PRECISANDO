@@ -1,5 +1,11 @@
 <div class="container">
-  <h1><%= current_user.username %>'s Profile <%= cl_image_tag current_user.photo.key, height: 70, width: 70, crop: :fill, class: "rounded-circle", alt: "picture" %> </h1>
+  <h1><%= current_user.username %>'s Profile
+    <% if current_user.photo.attached?  %>
+      <%= cl_image_tag current_user.photo.key, height: 70, width: 70, crop: :fill, class: "rounded-circle", alt: "picture" %>
+    <% else %>
+      <%= image_tag "https://cdn.pixabay.com/photo/2023/09/22/12/18/profile-8268938_640.png", alt: "default image", class: "rounded-circle", width: 70 %>
+    <% end %>
+  </h1>
   <p><strong>Full Name:</strong> <%= current_user.fullname %>     </p>
   <p><strong>Address:</strong> <%= current_user.address %></p>
   <p><strong>Email:</strong> <%= current_user.email %></p>
