@@ -48,27 +48,24 @@
   </div>
   <div class="pt-5">
     <% if current_user.products.present? %>
-      <h2>Pending Rentals:</h2>
-      <% pending_rentals = current_user.products.map(&:rentals).flatten.select { |rental| !rental.confirmed } %>
-      <% if pending_rentals.present? %>
-        <ul>
-         <ul class='list-group list-group-horizontal'>
-          <li class="list-group-item">
-            <%= rental.product.name %> - <%= rental.start_date %> to <%= rental.end_date %> 
-          </li>
-          <li class="list-group-item">
-            <%= button_to "Confirm", rental_path(rental), method: :patch, data: { confirm: "Are you sure you want to confirm this rental request?" }, class: 'btn btn-primary' %>
-          </li>
-          <li class="list-group-item">
-            <%= link_to "Reject", rental_path(rental), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to reject this rental request?'}, class: 'btn btn-warning' %>
-          </li>
-        </ul>
+  <h2>Pending Rentals:</h2>
+  <% pending_rentals = current_user.products.map(&:rentals).flatten.select { |rental| !rental.confirmed } %>
+  <% if pending_rentals.present? %>
+    <% pending_rentals.each do |rental| %>
+      <ul class='list-group list-group-horizontal'>
+        <li class="list-group-item">
+          <%= rental.product.name %> - <%= rental.start_date %> to <%= rental.end_date %> </li>
+        <li class="list-group-item">
+          <%= button_to "Confirm", rental_path(rental), method: :patch, data: { confirm: "Are you sure you want to confirm this rental request?" }, class: 'btn btn-primary' %> </li>
+        <li class="list-group-item">
+          <%= link_to "Reject", rental_path(rental), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to reject this rental request?'}, class: 'btn btn-warning' %>
+        </li>
+      </ul>
       <% end %>
-        </ul>
-      <% else %>
-        <p>No pending rentals.</p>
-      <% end %>
-    <% end %>
+  <% else %>
+    <p>No pending rentals.</p>
+  <% end %>
+<% end %>
       <h2>Rentals:</h2>
       <ul>
         <% current_user.rentals.each do |rental| %>
