@@ -15,7 +15,7 @@ class RentalsController < ApplicationController
 
   def update
     @rental = Rental.find(params[:id])
-    @rental.update(confirmed: true)
+    @rental.update_attribute(:confirmed, true)
     redirect_to profile_path(current_user), notice: "Rental request has been confirmed."
   end
 

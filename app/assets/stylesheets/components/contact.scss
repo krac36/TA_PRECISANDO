@@ -1,0 +1,25 @@
+#contact{
+  h2, h3{
+    color: $logo-black;
+    padding:10px;
+  }
+
+  p{
+    color: $logo-black;
+    padding: 10px;
+
+  }
+
+  ul {
+    color: $logo-black;
+    list-style: none;
+    padding: 10px;
+    text-align: center;
+
+    li{
+      color: $logo-black;
+      list-style: none;
+    }
+  }
+
+}
