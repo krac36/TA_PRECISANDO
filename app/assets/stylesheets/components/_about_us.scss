@@ -1,0 +1,28 @@
+#about-us {
+
+  h2, h3{
+    color: $logo-black;
+    padding:20px;
+  }
+
+  p{
+    color: $logo-black;
+    padding: 30px;
+
+  }
+
+  ul {
+    color: $logo-black;
+    list-style: none;
+    padding: 30px;
+    text-align: center;
+
+    li{
+      color: $logo-black;
+      list-style: none;
+      padding-left: 30px;
+      padding-right: 30px;
+
+    }
+  }
+}
